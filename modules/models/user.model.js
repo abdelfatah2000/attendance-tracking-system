@@ -18,7 +18,7 @@ const userSchema = new mongoose(
     role: {
       type: String,
       default: "Customer",
-      enum: ["HOD", "Customer"],
+      enum: ["HOD", "Employee"],
     },
     absence: {
       type: Number,
