@@ -9,7 +9,8 @@ const attendanceSchema = new mongoose(
     },
     check_in: Date,
     check_out: Date,
-    working_hour: Number,
+    dialy_working_hour: Number,
+    monthly_working_hour: Number,
   },
   {
     timestamps: true,

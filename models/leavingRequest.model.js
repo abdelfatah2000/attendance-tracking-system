@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const leavingRequestSchema = new Schema(
+const leavingRequestSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
