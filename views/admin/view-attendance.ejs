@@ -1,0 +1,105 @@
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">View Attendance</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <div class="card-body">
+            <div class="form-group">
+              <label>Department</label>
+              <select class="form-control <%= validationErrors.find(e => e.param === 'department') ? 'invalid' : '' %>"
+                name="department" id="department">
+                <% for (let department of departments) { %>
+                  <option value="<%= department._id %>">
+                    <%= department.title %>
+                  </option>
+                  <% } %>
+              </select>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-primary btn-block" id="fetch-attendance">Fetch Attendance</button>
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="csrf">
+            <div class="form-group">
+              <div class="alert alert-danger" id="error-attendance" style="display:none">
+
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+
+          <div id="emp_data" class="card-footer" style="display: none;">
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap" id="empTable">
+                <thead>
+                  <tr>
+                    <th>User Name</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Present</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#fetch-attendance").click(function () {
+      var department = $("#department").val()
+      var token = $('#csrf').val();
+      console.log(department)
+      var data = {
+        department: department,
+        '_csrf': token,
+      }
+      $.ajax({
+        type: 'POST',
+        url: '/admin/view-attendance',
+        data: data,
+        success: function (data) {
+          var myTable = "";
+          $("#emp_data").show();
+          data.forEach(x => {
+            myTable = `<tbody>
+                    <tr>
+                      <td>
+                        ${x.user.username}
+                      </td>
+                      <td>
+                        ${x.check_in}
+                      </td>
+                      <td>
+                        ${(x.check_out) ? x.check_out: 'Still Working'}
+                      </td>
+                      <td>
+                        ${x.present}
+                      </td>
+                    </tr>
+                </tbody>`
+            console.log(myTable);
+            $("#empTable").append(myTable)
+          });
+
+        }
+      })
+    })
+  })
+</script>

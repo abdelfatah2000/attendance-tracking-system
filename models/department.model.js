@@ -11,7 +11,6 @@ const departmentSchema = new mongoose.Schema(
       ref: "user",
       required: true,
     },
-    employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
   },
   {
     timestamps: true,

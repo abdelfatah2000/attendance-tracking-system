@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema(
     absence: {
       type: Number,
       default: 0,
+    },
+    department: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "department",
     },
   },
   {

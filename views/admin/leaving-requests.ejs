@@ -1,0 +1,59 @@
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Employee Apply for Leave</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <div class="table">
+            <table class="table">
+              <tr>
+                <th>ID</th>
+                <th>Employee Name</th>
+                <th>Department</th>
+                <th>Request Date</th>
+                <th>Action</th>
+              </tr>
+              <% for (let [i , leave] of data.entries()) { %>
+                <tr>
+                  <td>
+                    <%= i+1 %>
+                  </td>
+                  <td>
+                    <%= leave.user.username %>
+                  </td>
+                  <td>
+                    <%= leave.user.department.title %>
+                  </td>
+                  <td>
+                    <%= leave.createdAt.toISOString().split('T')[0] %>
+                  </td>
+                  <td>
+                    <% if (leave.status==0) { %>
+                      <button class="btn btn-danger" disabled="disabled" data-toggle="modal"
+                        data-target="#reply_modal">Disapproved</button>
+                      <% } else if (leave.status==1) { %>
+                        <button class="btn btn-warning" disabled="disabled" data-toggle="modal"
+                          data-target="#reply_modal">Approved</button>
+                        <% } else { %>
+                          <a href="/admin/approve-leaving-request/<%= leave._id %>" class="btn btn-success">Approve</a>
+                          <a class="btn btn-danger" href="/admin/reject-leaving-request">Disapprove</a>
+                          <% } %>
+                  </td>
+                </tr>
+                <% } %>
+            </table>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- /.content -->

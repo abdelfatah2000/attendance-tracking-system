@@ -5,6 +5,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const path = require("path");
+var bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 require("dotenv").config();
 
@@ -25,6 +26,9 @@ const csrfProtection = csrf();
 
 app.set("view engine", "ejs");
 
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));

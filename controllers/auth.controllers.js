@@ -30,6 +30,7 @@ exports.postLogin = (req, res, next) => {
     return res.status(422).render('auth/login', {
       path: '/login',
       pageTitle: 'Login',
+      layout:false,
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email: email,
@@ -46,6 +47,7 @@ exports.postLogin = (req, res, next) => {
         return res.status(422).render('auth/login', {
           path: '/login',
           pageTitle: 'Login',
+          layout:false,
           errorMessage: 'Invalid email or password.',
           oldInput: {
             email: email,
@@ -61,12 +63,13 @@ exports.postLogin = (req, res, next) => {
             req.session.isLoggedIn = true;
             req.session.user = user;
             return req.session.save(err => {
-              res.redirect('/admin/add-user');
+              res.redirect('/admin/add-employee');
             });
           }
           return res.status(422).render('auth/login', {
             path: '/login',
             pageTitle: 'Login',
+            layout:false,
             errorMessage: 'Invalid email or password.',
             oldInput: {
               email: email,
