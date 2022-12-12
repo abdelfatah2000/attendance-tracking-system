@@ -39,13 +39,13 @@
                         <td><%= emp.phone %></td>
                         <td><%= emp.department.title %></td>
                         <td><%= emp.createdAt.toISOString().split('T')[0] %></td>
-                        <td><a href="/admin/edit-employee/<%= emp._id %>" class="btn btn-success fas fa-edit"></a>
-                          <form role="form" action="/admin/delete-employee" method="POST" style="display: inline-block !important;">
+                        <td><a href="/hod/edit-employee/<%= emp._id %>" class="btn btn-success fas fa-edit"></a>
+                          <form role="form" action="/hod/delete-employee" method="POST" style="display: inline-block !important;">
                             <input type="hidden" value="<%= emp._id %>" name="empId">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                           <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true" ></i></button>
                           </form>
-                          <a href="/admin/employee-attendance/<%= emp._id %>" class="btn btn-warning fa fa-calendar-check"></a>
+                          <a href="/hod/employee-attendance/<%= emp._id %>" class="btn btn-warning fa fa-calendar-check"></a>
                           </td>
                       </tr>
                     <% } %>

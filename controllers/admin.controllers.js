@@ -9,6 +9,7 @@ exports.getAddEmployee = (req, res, next) => {
     res.render("admin/add-employee", {
       departments: departments,
       username: req.session.user.username,
+      role: req.session.user.role,
       pageTitle: "Add Employee",
       path: "/admin/add-employee",
       hasError: false,
@@ -27,7 +28,7 @@ exports.postAddEmployee = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render("/admin/add-user", {
+    return res.status(422).render("/admin/add-employee", {
       hasError: true,
       errorMessage: errors.array()[0].msg,
       oldInput: {
@@ -496,7 +497,6 @@ exports.getLeavingRequest = (req, res, next) => {
       },
     })
     .then((data) => {
-      console.log(data);
       res.render("admin/leaving-requests", {
         pageTitle: "Leaving Request",
         path: "/admin/leaving-request",
@@ -599,7 +599,7 @@ exports.adminHome = (req, res, next) => {
 exports.employeeAttendance = (req, res, next) => {
   const empId = req.params.empId;
   Attendance.find({ user: empId })
-    .populate("user", 'username')
+    .populate("user", "username")
     .then((data) => {
       res.render("admin/employee-attendance", {
         data: data,

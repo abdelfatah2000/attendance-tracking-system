@@ -14,7 +14,7 @@ const attendanceSchema = new mongoose.Schema(
     },
     check_in: Date,
     check_out: Date,
-    dialy_working_hour: Number,
+    working_hour: Number,
     present: {
       type: Boolean,
       default: false

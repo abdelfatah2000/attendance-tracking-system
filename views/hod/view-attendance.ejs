@@ -43,7 +43,7 @@
                     <th>User Name</th>
                     <th>Check In</th>
                     <th>Check Out</th>
-                    <th>Working Hour</th>
+                    <th>Working Hours</th>
                     <th>Present</th>
                   </tr>
                 </thead>
@@ -73,7 +73,7 @@
       }
       $.ajax({
         type: 'POST',
-        url: '/admin/view-attendance',
+        url: '/hod/view-attendance',
         data: data,
         success: function (data) {
           var myTable = "";
@@ -88,10 +88,10 @@
                         ${x.check_in}
                       </td>
                       <td>
-                        ${(x.check_out) ? x.check_out: 'Still Working'}
+                        ${(x.check_out) ? x.check_out : 'Still Working'}
                       </td>
                       <td>
-                        ${(x.working_hour) ? x.working_hour: 'Still Working'}
+                        ${(x.working_hour) ? x.working_hour : 'Still Working'}
                       </td>
                       <td>
                         ${x.present}

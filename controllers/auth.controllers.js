@@ -14,6 +14,7 @@ exports.getLogin = (req, res, next) => {
     path: '/login',
     pageTitle: 'Login',
     errorMessage: message,
+    csrfToken: req.csrfToken(),
     oldInput: {
       email: '',
       password: ''
@@ -23,6 +24,9 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
+  console.log(req.headers)
+  console.log("========================================")
+  console.log(req.body)
   const email = req.body.email;
   const password = req.body.password;
   const errors = validationResult(req);
@@ -30,6 +34,7 @@ exports.postLogin = (req, res, next) => {
     return res.status(422).render('auth/login', {
       path: '/login',
       pageTitle: 'Login',
+      csrfToken: req.csrfToken(),
       layout:false,
       errorMessage: errors.array()[0].msg,
       oldInput: {
@@ -43,10 +48,10 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
-        console.log('user here')
         return res.status(422).render('auth/login', {
           path: '/login',
           pageTitle: 'Login',
+          csrfToken: req.csrfToken(),
           layout:false,
           errorMessage: 'Invalid email or password.',
           oldInput: {
@@ -69,6 +74,7 @@ exports.postLogin = (req, res, next) => {
           return res.status(422).render('auth/login', {
             path: '/login',
             pageTitle: 'Login',
+            csrfToken: req.csrfToken(),
             layout:false,
             errorMessage: 'Invalid email or password.',
             oldInput: {

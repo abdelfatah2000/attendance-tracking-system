@@ -22,11 +22,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       default: "Employee",
-      enum: ["HOD", "Employee"],
-    },
-    absence: {
-      type: Number,
-      default: 0,
+      enum: ["HOD", "Employee", 'Admin'],
     },
     department: {
       type: mongoose.Schema.Types.ObjectId,

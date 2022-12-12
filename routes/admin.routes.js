@@ -2,6 +2,7 @@ const app = require("express").Router();
 const adminControllers = require("../controllers/admin.controllers");
 const isAuth = require("../config/auth");
 
+
 app.get("/add-employee", isAuth, adminControllers.getAddEmployee);
 app.post("/add-employee", isAuth, adminControllers.postAddEmployee);
 app.get("/add-hod", isAuth, adminControllers.getAddHOD);
@@ -27,4 +28,6 @@ app.get("/approve-leaving-request/:reqId", isAuth, adminControllers.approveLeavi
 app.post("/reject-leaving-request/:reqId", isAuth, adminControllers.rejectLeavingRequest);
 app.get("/home", isAuth, adminControllers.adminHome);
 app.get("/employee-attendance/:empId", isAuth, adminControllers.employeeAttendance);
+
+
 module.exports = app;

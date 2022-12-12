@@ -7,10 +7,16 @@ const leavingRequestSchema = new mongoose.Schema(
       ref: "user",
       required: true,
     },
+    department: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "department",
+      required: true,
+    },
+    reason: String,
     status: {
       type: Number,
       default: 2,
-    }
+    },
   },
   {
     timestamps: true,

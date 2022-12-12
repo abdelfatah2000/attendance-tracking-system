@@ -21,14 +21,16 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
+                        <th>ID</th>
                         <th>User Name</th>
                         <th>Email</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <% for (let dep of departments) { %>
+                      <% for (let [i, dep] of departments.entries()) { %>
                       <tr>
+                        <td><%= i+1 %></td>
                         <td><%= dep.title %></td>
                         <td><%= dep.hod.username %></td>
                         <td><a href="/admin/edit-department/<%= dep._id %>" class="btn btn-success fas fa-edit"></a>
